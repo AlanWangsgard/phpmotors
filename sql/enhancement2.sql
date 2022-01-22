@@ -1,6 +1,6 @@
 INSERT Into clients (clientFirstname, clientLastname, clientEmail, clientPassword, comment) VALUES ("Tony", "Stark", "tony@starkent.com", "Iam1ronM@n", "I am the real Ironman");
 
-UPDATE clients SET clientLevel=3 WHERE clientId=1;
+UPDATE clients SET clientLevel=3 WHERE clientFirstname ="Tony";
 
 UPDATE inventory SET invDescription=REPLACE(invDescription, "small", "spacious") WHERE invMake="GM" AND invModel="Hummer";
 
