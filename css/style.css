@@ -218,6 +218,42 @@ footer p {
     display: none;
 }
 
+.login,
+.register {
+    margin-left: 1%;
+}
+
+
+/* .login input,
+.submit,
+.register input {
+    margin-bottom: 10px;
+} */
+
+.submit {
+    background-color: #4c96d7;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.login label,
+.register label {
+    font-weight: 600;
+}
+
+.showPassword {
+    background-color: #3a3a3a;
+    color: white;
+    padding: 10px;
+    margin-top: 0px;
+}
+
+.register p {
+    margin: 0px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
 @media (min-width: 800px) {
     /* Body Styles */
     body {

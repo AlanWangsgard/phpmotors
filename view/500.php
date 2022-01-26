@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Content Title | PHP Motors </title>
+    <title>Error | PHP Motors </title>
     <link href="/phpmotors/css/style.css" type="text/css" rel="stylesheet" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>

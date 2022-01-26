@@ -13,7 +13,9 @@
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/commonContent/header.php'; ?>
     </header>
     <nav>
-        <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/commonContent/nav.php'; ?>
+        <?php //require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/commonContent/nav.php';//
+        echo $navList;
+        ?>
     </nav>
     <main>
         <h1>Content Title Here</h1>
