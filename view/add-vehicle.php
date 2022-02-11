@@ -33,35 +33,35 @@
                 <br>
                 <label for="make">Make</label>
                 <br>
-                <input type="text" name="make">
+                <input type="text" name="make" id="make">
                 <br>
                 <label for="model">Model</label>
                 <br>
-                <input type="text" name="model">
+                <input type="text" name="model" id="model">
                 <br>
-                <lable for="description">Description</lable>
+                <label for="description">Description</label>
                 <br>
-                <textarea rows="4" name="description"></textarea>
+                <textarea rows="4" name="description" id="description"></textarea>
                 <br>
                 <label for="imagePath">Image Path</label>
                 <br>
-                <input type="text" name="imagePath">
+                <input type="text" name="imagePath" id="imagePath">
                 <br>
                 <label for="thumbnailPath">Thumbnail Path</label>
                 <br>
-                <input type="text" name="thumbnailPath">
+                <input type="text" name="thumbnailPath" id="thumbnailPath">
                 <br>
                 <label for="price">Price</label>
                 <br>
-                <input type="text" name="price">
+                <input type="text" name="price" id="price">
                 <br>
                 <label for="stock"># in stock</label>
                 <br>
-                <input type="text" name="stock">
+                <input type="text" name="stock" id="stock">
                 <br>
                 <label for="color">Color</label>
                 <br>
-                <input type="text" name="color">
+                <input type="text" name="color" id="color">
                 <br>
                 <input type="submit" value="Add Vehicle">
                 <input type="hidden" name="action" value="addVehicletoInv">

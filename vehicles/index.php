@@ -51,6 +51,7 @@ switch ($action) {
 
         // Check and report the result
         if ($regOutcome === 1) {
+            header("Refresh:0");
             include '../view/vehicle-man.php';
             exit;
         } else {
