@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login | PHP Motors </title>
+    <title>Vehicle Management | PHP Motors </title>
     <link href="/phpmotors/css/style.css" type="text/css" rel="stylesheet" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -18,20 +18,16 @@
         ?>
     </nav>
     <main>
-        <div class="login">
-            <h1>Sign In</h1>
-            <?php
-            if (isset($message)) {
-                echo $message;
-            }
-            ?>
-            <label for="email">Email</label><br>
-            <input type="text" name="user_email" id="email"><br>
-            <label for="password">Password</label><br>
-            <input type="text" name="user_password" id="password"><br>
-            <button class="submit">Sign in</button><br>
-            <a href="?action=register">Not a member yet?</a>
-        </div>
+        <h1>Vehicle Management</h1>
+        <?php
+        if (isset($message)) {
+            echo $message;
+        }
+        ?>
+        <ul>
+            <li><a href="/phpmotors/vehicles/index.php?action=addClass">Add Classification</a></li>
+            <li><a href="/phpmotors/vehicles/index.php?action=addVehicle">Add Vehicle</a></li>
+        </ul>
     </main>
     <footer>
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/commonContent/footer.php'; ?>

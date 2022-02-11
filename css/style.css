@@ -254,6 +254,28 @@ footer p {
     font-weight: 600;
 }
 
+.carForm {
+    margin-left: 25px;
+}
+
+.carForm input,
+.carForm select {
+    margin-bottom: 10px;
+}
+
+.classForm {
+    margin-left: 25px;
+}
+
+.classForm input {
+    margin-bottom: 10px;
+}
+
+.serverMessage {
+    color: crimson;
+    font-weight: bolder;
+}
+
 @media (min-width: 800px) {
     /* Body Styles */
     body {

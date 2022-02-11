@@ -20,17 +20,25 @@
     <main>
         <div class="register">
             <h1>Register</h1>
-            <label for="firstname">Email</label><br>
-            <input type="text" name="first_name" id="firstname"><br>
-            <label for="lastname">Last Name</label><br>
-            <input type="text" name="last_name" id="lastname"><br>
-            <label for="email">Email</label><br>
-            <input type="text" name="user_email" id="email"><br>
-            <p>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter and 1 special character</p>
-            <label for="password">Password</label><br>
-            <input type="text" name="user_password" id="password"><br>
-            <button class="showPassword">Show Passowrd</button><br>
-            <button class="submit">Register</button><br>
+            <?php
+            if (isset($message)) {
+                echo $message;
+            }
+            ?>
+            <form action="/phpmotors/accounts/index.php" method="post">
+                <label for="firstname">Email</label><br>
+                <input type="text" name="clientFirstname" id="firstname"><br>
+                <label for="lastname">Last Name</label><br>
+                <input type="text" name="clientLastname" id="lastname"><br>
+                <label for="email">Email</label><br>
+                <input type="text" name="clientEmail" id="email"><br>
+                <p>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter and 1 special character</p>
+                <label for="password">Password</label><br>
+                <input type="text" name="clientPassword" id="password"><br>
+                <input class="submit" type="submit" name="submit" value="Register" id="regbtn">
+                <input type="hidden" name="action" value="register">
+                <!-- <button class="submit">Register</button><br> -->
+            </form>
         </div>
     </main>
     <footer>
