@@ -25,12 +25,16 @@
                 echo $message;
             }
             ?>
+            <form method="post">
             <label for="email">Email</label><br>
-            <input type="text" name="user_email" id="email"><br>
+            <input type="email" name="clientEmail" id="email" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required><br>
             <label for="password">Password</label><br>
-            <input type="text" name="user_password" id="password"><br>
+            <span>Password must be at least 8 charachters, have 1 uppercase leeter, 1 number, and 1 special character.</span><br>
+            <input type="password" name="clientPassword" id="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required><br>
             <button class="submit">Sign in</button><br>
+            <input type="hidden" name="action" value="Login">
             <a href="?action=register">Not a member yet?</a>
+            </form>
         </div>
     </main>
     <footer>

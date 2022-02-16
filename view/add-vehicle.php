@@ -33,35 +33,35 @@
                 <br>
                 <label for="make">Make</label>
                 <br>
-                <input type="text" name="make" id="make">
+                <input type="text" name="make" id="make" <?php if(isset($make)){echo "value='$make'";}  ?> required>
                 <br>
                 <label for="model">Model</label>
                 <br>
-                <input type="text" name="model" id="model">
+                <input type="text" name="model" id="model" <?php if(isset($model)){echo "value='$model'";}  ?> required>
                 <br>
                 <label for="description">Description</label>
                 <br>
-                <textarea rows="4" name="description" id="description"></textarea>
+                <textarea rows="4" name="description" id="description" <?php if(isset($description)){echo "value='$description'";}  ?> required></textarea>
                 <br>
                 <label for="imagePath">Image Path</label>
                 <br>
-                <input type="text" name="imagePath" id="imagePath">
+                <input type="text" name="imagePath" id="imagePath" <?php if(isset($image)){echo "value='$image'";}  ?> required>
                 <br>
                 <label for="thumbnailPath">Thumbnail Path</label>
                 <br>
-                <input type="text" name="thumbnailPath" id="thumbnailPath">
+                <input type="text" name="thumbnailPath" id="thumbnailPath" <?php if(isset($thumbnail)){echo "value='$thumbnail'";}  ?> required>
                 <br>
                 <label for="price">Price</label>
                 <br>
-                <input type="text" name="price" id="price">
+                <input type="text" name="price" id="price" <?php if(isset($price)){echo "value='$price'";}  ?> required>
                 <br>
                 <label for="stock"># in stock</label>
                 <br>
-                <input type="text" name="stock" id="stock">
+                <input type="text" name="stock" id="stock" <?php if(isset($stock)){echo "value='$stock'";}  ?> required>
                 <br>
                 <label for="color">Color</label>
                 <br>
-                <input type="text" name="color" id="color">
+                <input type="text" name="color" id="color" <?php if(isset($color)){echo "value='$color'";}  ?> required>
                 <br>
                 <input type="submit" value="Add Vehicle">
                 <input type="hidden" name="action" value="addVehicletoInv">

@@ -8,6 +8,8 @@ require_once '../model/main-model.php';
 
 require_once '../model/accounts-model.php';
 
+require_once '../library/functions.php';
+
 // Get the array of classifications
 $classifications = getClassifications();
 
@@ -29,20 +31,25 @@ if ($action == NULL) {
 
 switch ($action){
 case 'register':
-$clientFirstname = filter_input(INPUT_POST, 'clientFirstname');
-$clientLastname = filter_input(INPUT_POST, 'clientLastname');
-$clientEmail = filter_input(INPUT_POST, 'clientEmail');
-$clientPassword = filter_input(INPUT_POST, 'clientPassword');
+$clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING));
+$clientLastname = trim(filter_input(INPUT_POST,'clientLastname', FILTER_SANITIZE_STRING));
+$clientEmail = trim(filter_input(INPUT_POST,'clientEmail', FILTER_SANITIZE_EMAIL));
+$clientPassword = trim(filter_input(INPUT_POST,'clientPassword', FILTER_SANITIZE_STRING));
+
+$clientEmail = checkEmail($clientEmail);
+$checkPassword = checkPassword($clientPassword);
 
 // Check for missing data
-if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientPassword)) {
+if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)) {
     $message = '<p>Please provide information for all empty form fields.</p>';
     include '../view/registration.php';
     exit;
 }
 
 // Send the data to the model
-$regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword);
+$hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+
+$regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $hashedPassword);
 
 // Check and report the result
 if ($regOutcome === 1) {
@@ -54,11 +61,24 @@ if ($regOutcome === 1) {
     include '../view/registration.php';
     exit;
 }
-break;
-    case 'login':
-        include "../view/login.php";
-        break;
-    case 'register':
-        include "../view/registration.php";
-        break;
+    break;
+case 'login':
+    include "../view/login.php";
+    break;
+case 'register':
+    include "../view/registration.php";
+    break;
+case 'Login':
+    $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
+    $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
+
+    $clientEmail = checkEmail($clientEmail);
+    $checkPassword = checkPassword($clientPassword);
+
+    if (empty($clientEmail) || empty($checkPassword)) {
+        $message = '<p>Please provide information for all empty form fields.</p>';
+        include '../view/login.php';
+        exit;
+    }
+    break;
 }

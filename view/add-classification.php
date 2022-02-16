@@ -25,13 +25,14 @@
         }
         ?>
         <div class="classForm">
-        <h3>Classification Name</h3>
-        <form action="/phpmotors/vehicles/index.php" method="post">
-            <input type="text" name="classificationName">
-            <br>
-            <input type="submit" value="Add Classification">
-            <input type="hidden" name="action" value="addClassification">
-        </form>
+            <h3>Classification Name</h3>
+            <form action="/phpmotors/vehicles/index.php" method="post">
+                <span>The classification name must be 30 characters or less.</span><br>
+                <input type="text" name="classificationName" maxlength="30" required>
+                <br>
+                <input type="submit" value="Add Classification">
+                <input type="hidden" name="action" value="addClassification">
+            </form>
         </div>
     </main>
     <footer>
