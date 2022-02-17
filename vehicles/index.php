@@ -8,27 +8,13 @@ require_once '../model/main-model.php';
 
 require_once '../model/vehicle-model.php';
 
+require_once '../library/functions.php';
+
 
 // Get the array of classifications
 $classifications = getClassifications();
 
-// var_dump($classifications);
-// exit;
-
-// Build a navigation bar using the $classifications array
-$navList = '<ul>';
-$navList .= "<li><a href='http://localhost/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></li>";
-foreach ($classifications as $classification) {
-    $navList .= "<li><a href='/phpmotors/index.php?action=" . urlencode($classification['classificationName']) . "' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
-}
-$navList .= '</ul>';
-
-$classificationList = '<select name="class">';
-$classificationList .= "<option value='choose Classification'>Choose Classification</option>";
-foreach ($classifications as $classification) {
-    $classificationList .= "<option value='" . $classification['classificationName']  . "'>" . $classification['classificationName'] . "</option>";
-}
-$classificationList .= '</select>';
+$navList = createNav($classifications);
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -61,15 +47,15 @@ switch ($action) {
         }
         break;
     case 'addVehicletoInv':
-        $carclass = filter_input(INPUT_POST, "class");
-        $make = filter_input(INPUT_POST, 'make');
-        $model = filter_input(INPUT_POST, 'model');
-        $description = filter_input(INPUT_POST, 'description');
-        $image = filter_input(INPUT_POST, 'imagePath');
-        $thumbnail = filter_input(INPUT_POST, 'thumbnailPath');
-        $price = filter_input(INPUT_POST, 'price');
-        $stock = filter_input(INPUT_POST, 'stock');
-        $color = filter_input(INPUT_POST, 'color');
+        $carclass = trim(filter_input(INPUT_POST, "class", FILTER_SANITIZE_STRING));
+        $make = trim(filter_input(INPUT_POST, 'make', FILTER_SANITIZE_STRING));
+        $model = trim(filter_input(INPUT_POST,'model', FILTER_SANITIZE_STRING));
+        $description = trim(filter_input(INPUT_POST,'description', FILTER_SANITIZE_STRING));
+        $image = trim(filter_input(INPUT_POST,'imagePath', FILTER_SANITIZE_STRING));
+        $thumbnail = trim(filter_input(INPUT_POST,'thumbnailPath', FILTER_SANITIZE_STRING));
+        $price = trim(filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_ALLOW_FRACTION));
+        $stock = trim(filter_input(INPUT_POST, 'stock', FILTER_SANITIZE_NUMBER_INT));
+        $color = trim(filter_input(INPUT_POST,'color', FILTER_SANITIZE_STRING));
 
         // Check for missing data
         if (empty($carclass) || empty($make) || empty($model) || empty($description) || empty($image) || empty($thumbnail) || empty($price) || empty($stock) || empty($color)) {

@@ -1,4 +1,17 @@
-<!DOCTYPE html>
+<?php
+    $classificationList = '<select name="class">';
+    $classificationList .= "<option value='choose Classification'>Choose Classification</option>";
+    foreach ($classifications as $classification) {
+        $classificationList .= "<option value='$classification[classificationName]'";
+        if(isset($carclass)){
+            if($classification['classificationName'] === $carclass){
+                $classificationList .= "selected";
+            }
+        }
+        $classificationList .= "> $classification[classificationName] </option>";
+    }
+    $classificationList .= '</select>';
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -41,7 +54,7 @@
                 <br>
                 <label for="description">Description</label>
                 <br>
-                <textarea rows="4" name="description" id="description" <?php if(isset($description)){echo "value='$description'";}  ?> required></textarea>
+                <textarea rows="4" name="description" id="description" required><?php if(isset($description)){echo $description;}  ?></textarea>
                 <br>
                 <label for="imagePath">Image Path</label>
                 <br>
