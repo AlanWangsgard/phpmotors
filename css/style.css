@@ -282,6 +282,13 @@ footer p {
     margin-left: 25px;
 }
 
+#cookie {
+    font-size: 14px;
+    position: relative;
+    bottom: 20px;
+    left: 20px;
+}
+
 @media (min-width: 800px) {
     /* Body Styles */
     body {
@@ -291,6 +298,10 @@ footer p {
         border-radius: 5px;
     }
     /* Header Styles */
+    #cookie {
+        font-size: 20px;
+        left: 25px;
+    }
     header a {
         text-decoration: none;
         color: #3a3a3a;

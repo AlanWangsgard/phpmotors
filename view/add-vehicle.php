@@ -34,8 +34,8 @@
         <div class="carForm">
             <h1>Add Vehicle</h1>
             <?php
-            if (isset($message)) {
-                echo $message;
+            if (isset($_SESSION['message'])) {
+                echo $_SESSION['message'];
             }
             ?>
             <p>*All feilds are required</p>

@@ -20,8 +20,8 @@
     <main>
         <h1>Vehicle Management</h1>
         <?php
-        if (isset($message)) {
-            echo $message;
+        if (isset($_SESSION['message'])) {
+            echo $_SESSION['message'];
         }
         ?>
         <ul>

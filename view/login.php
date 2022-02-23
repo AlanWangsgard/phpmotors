@@ -21,11 +21,11 @@
         <div class="login">
             <h1>Sign In</h1>
             <?php
-            if (isset($message)) {
-                echo $message;
+            if (isset($_SESSION['message'])) {
+                echo $_SESSION['message'];
             }
             ?>
-            <form method="post">
+            <form method="post" action="/phpmotors/accounts/">
             <label for="email">Email</label><br>
             <input type="email" name="clientEmail" id="email" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required><br>
             <label for="password">Password</label><br>

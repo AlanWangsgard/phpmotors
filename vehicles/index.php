@@ -1,5 +1,8 @@
 <?php
-// this is the main controller for phpmotors
+// this is the vehicles controller for phpmotors
+
+// creat session
+session_start();
 
 // Get the database connection file
 require_once '../library/connections.php';
@@ -27,7 +30,7 @@ switch ($action) {
 
         // Check for missing data
         if (empty($classificationName)) {
-            $message = '<p class="serverMessage">Please enter a classification name to be added.</p>';
+            $_SESSION['message'] = '<p class="serverMessage">Please enter a classification name to be added.</p>';
             include '../view/add-classification.php';
             exit;
         }
@@ -41,7 +44,7 @@ switch ($action) {
             include '../view/vehicle-man.php';
             exit;
         } else {
-            $message = "<p class='serverMessage'>Classification not added</p>";
+            $_SESSION['message'] = "<p class='serverMessage'>Classification not added</p>";
             include '../view/add-classification.php';
             exit;
         }
@@ -59,7 +62,7 @@ switch ($action) {
 
         // Check for missing data
         if (empty($carclass) || empty($make) || empty($model) || empty($description) || empty($image) || empty($thumbnail) || empty($price) || empty($stock) || empty($color)) {
-            $message = '<p class="serverMessage">Please fill out all feilds for a vehicle to be added.</p>';
+            $_SESSION['message'] = '<p class="serverMessage">Please fill out all feilds for a vehicle to be added.</p>';
             include '../view/add-vehicle.php';
             exit;
         }
@@ -69,11 +72,11 @@ switch ($action) {
 
         // Check and report the result
         if ($regOutcome === 1) {
-            $message = "<p class='serverMessage'>Vehicle added</p>";
+            $_SESSION['message'] = "<p class='serverMessage'>Vehicle added</p>";
             include '../view/vehicle-man.php';
             exit;
         } else {
-            $message = "<p class='serverMessage'>Vehicle not added</p>";
+            $_SESSION['message'] = "<p class='serverMessage'>Vehicle not added</p>";
             include '../view/add-vehicle.php';
             exit;
         }
