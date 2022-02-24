@@ -111,4 +111,7 @@ case 'Login':
     include '../view/admin.php';
     exit;
     break;
+    case 'admin':
+    include '../view/admin.php';
+    break;
 }

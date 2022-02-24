@@ -23,7 +23,7 @@ header {
     font-family: 'Courier New', Courier, monospace;
 }
 
-header a {
+.log {
     text-decoration: none;
     color: #3a3a3a;
     font-size: 17px;
@@ -287,6 +287,8 @@ footer p {
     position: relative;
     bottom: 20px;
     left: 20px;
+    text-decoration: none;
+    color: #3a3a3a;
 }
 
 @media (min-width: 800px) {
@@ -302,7 +304,7 @@ footer p {
         font-size: 20px;
         left: 25px;
     }
-    header a {
+    .log {
         text-decoration: none;
         color: #3a3a3a;
         font-size: 25px;

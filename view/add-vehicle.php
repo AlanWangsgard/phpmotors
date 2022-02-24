@@ -1,4 +1,10 @@
 <?php
+if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] == TRUE) {
+    header("Location: /phpmotors/");
+};
+if ($_SESSION['clientData']['clientLevel'] < 2) {
+    header("Location: /phpmotors/");
+}
     $classificationList = '<select name="class">';
     $classificationList .= "<option value='choose Classification'>Choose Classification</option>";
     foreach ($classifications as $classification) {

@@ -1,8 +1,7 @@
 <?php
-if (!$_SESSION['loggedin'] = TRUE) {
-    header("/phpmotors/");
+if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] == TRUE) {
+    header("Location: /phpmotors/");
 };
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

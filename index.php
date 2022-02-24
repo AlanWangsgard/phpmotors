@@ -34,6 +34,7 @@ switch ($action) {
     case "LogOut":
         session_unset();
         session_destroy();
+        $_SESSION['loggedin'] = FALSE;
         include 'view/home.php';
         exit;
     default:
