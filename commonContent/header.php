@@ -1,4 +1,5 @@
 <img src="/phpmotors/images/site/logo.png" alt="Logo.png">
+<div class="welcome">
 <?php
 if (isset($_SESSION['clientData']['clientFirstname'])) {
     echo "<a class='cookie' href='/phpmotors/accounts/index.php?action=admin' id='cookie'>Welcome " .$_SESSION['clientData']['clientFirstname']. "!</span>";
@@ -10,3 +11,4 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']){
 
 }
 ?>
+</div>

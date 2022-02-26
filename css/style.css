@@ -26,10 +26,12 @@ header {
 .log {
     text-decoration: none;
     color: #3a3a3a;
-    font-size: 17px;
-    float: right;
+    font-size: 10px;
+    position: relative;
     margin-top: 5px;
     margin-right: 5px;
+    grid-row: 1;
+    grid-column: 1;
 }
 
 header img {
@@ -283,12 +285,20 @@ footer p {
 }
 
 #cookie {
-    font-size: 14px;
+    font-size: 10px;
     position: relative;
-    bottom: 20px;
-    left: 20px;
     text-decoration: none;
     color: #3a3a3a;
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.welcome {
+    display: grid;
+    float: right;
+    width: 40%;
+    grid-template-columns: 100% 0;
+    position: relative;
 }
 
 @media (min-width: 800px) {
@@ -303,14 +313,18 @@ footer p {
     #cookie {
         font-size: 20px;
         left: 25px;
+        grid-column: 1;
+        bottom: 20px;
     }
     .log {
         text-decoration: none;
         color: #3a3a3a;
         font-size: 25px;
         float: right;
-        margin-right: 50px;
+        bottom: 10px;
         margin-top: 20px;
+        grid-column: 2;
+        text-align: right;
     }
     header img {
         width: auto;
@@ -388,5 +402,10 @@ footer p {
     }
     .updated {
         display: block;
+    }
+    .welcome {
+        width: 70%;
+        max-height: 50px;
+        grid-template-columns: 50% 50%;
     }
 }
