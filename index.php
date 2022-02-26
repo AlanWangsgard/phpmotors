@@ -31,12 +31,12 @@ switch ($action) {
     case 'template':
         include "view/template.php";
         break;
-    case "LogOut":
-        session_unset();
-        session_destroy();
-        $_SESSION['loggedin'] = FALSE;
-        include 'view/home.php';
-        exit;
+    // case "LogOut":
+    //     session_unset();
+    //     session_destroy();
+    //     $_SESSION['loggedin'] = FALSE;
+    //     include 'view/home.php';
+    //     exit;
     default:
         include 'view/home.php';
 }
