@@ -114,4 +114,10 @@ case 'Login':
     case 'admin':
     include '../view/admin.php';
     break;
+    case "LogOut":
+        session_unset();
+        session_destroy();
+        $_SESSION['loggedin'] = FALSE;
+        header('Location: /phpmotors/');
+    exit;
 }
