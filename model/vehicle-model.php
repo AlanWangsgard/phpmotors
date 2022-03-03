@@ -77,3 +77,50 @@ function getInventoryByClassification($classificationId)
     $stmt->closeCursor();
     return $inventory;
 }
+
+// Get vehicle information by invId
+function getInvItemInfo($invId)
+{
+    $db = phpmotorsConnect();
+    $sql = 'SELECT * FROM inventory WHERE invId = :invId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $invInfo;
+}
+
+// Update a vehicle
+function updateVehicle($make, $model, $description, $image, $thumbnail, $price, $stock, $color, $classificationId, $invId)
+{
+    $db = phpmotorsConnect();
+    $sql = 'UPDATE inventory SET invMake = :invMake, invModel = :invModel, invDescription = :invDescription, invImage = :invImage, invThumbnail = :invThumbnail, invPrice = :invPrice, invStock = :invStock, invColor = :invColor, classificationId = :classificationId WHERE invId = :invId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT);
+    $stmt->bindValue(':invMake', $make, PDO::PARAM_STR);
+    $stmt->bindValue(':invModel', $model, PDO::PARAM_STR);
+    $stmt->bindValue(':invDescription', $description, PDO::PARAM_STR);
+    $stmt->bindValue(':invImage', $image, PDO::PARAM_STR);
+    $stmt->bindValue(':invThumbnail', $thumbnail, PDO::PARAM_STR);
+    $stmt->bindValue(':invPrice', $price, PDO::PARAM_STR);
+    $stmt->bindValue(':invStock', $stock, PDO::PARAM_INT);
+    $stmt->bindValue(':invColor', $color, PDO::PARAM_STR);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    $rowsChanged = $stmt->rowCount();
+    $stmt->closeCursor();
+    return $rowsChanged;
+}
+
+function deleteVehicle($invId)
+{
+    $db = phpmotorsConnect();
+    $sql = 'DELETE FROM inventory WHERE invId = :invId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    $rowsChanged = $stmt->rowCount();
+    $stmt->closeCursor();
+    return $rowsChanged;
+}

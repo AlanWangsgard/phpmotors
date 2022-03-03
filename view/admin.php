@@ -32,6 +32,9 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] == TRUE) {
             <li>Last Name: <?php echo $_SESSION['clientData']['clientLastname'] ?></li>
             <li>Email: <?php echo $_SESSION['clientData']['clientEmail'] ?></li>
         </ul>
+        <h2>Account Managment</h2>
+        <p>Use This link to update account information</p>
+        <a href="/phpmotors/accounts/index.php?action=up">Update Account Information</a>
         <?php 
             if($_SESSION['clientData']['clientLevel'] > 1){
                 echo "<h2>Inventory Management</h2><p>Use this link to manage inventory</p><a href='/phpmotors/vehicles/'>Vehicle Management</a>";

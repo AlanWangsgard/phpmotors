@@ -73,6 +73,7 @@ switch ($action) {
         // Check and report the result
         if ($regOutcome === 1) {
             $_SESSION['message'] = "<p class='serverMessage'>Vehicle added</p>";
+            $classificationList = buildClassificationList($classifications);
             include '../view/vehicle-man.php';
             exit;
         } else {
@@ -96,6 +97,77 @@ switch ($action) {
         // Convert the array to a JSON object and send it back 
         echo json_encode($inventoryArray);
         // echo json_encode("hello");
+        break;
+    case 'mod':
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
+        $invInfo = getInvItemInfo($invId);
+        if (count($invInfo) < 1) {
+            $message = 'Sorry, no vehicle information could be found.';
+        }
+        include '../view/vehicle-update.php';
+        exit;
+        break;
+    case 'updateVehicle':
+        $classificationId = trim(filter_input(INPUT_POST, "classificationId", FILTER_SANITIZE_STRING));
+        $make = trim(filter_input(INPUT_POST, 'make', FILTER_SANITIZE_STRING));
+        $model = trim(filter_input(INPUT_POST, 'model', FILTER_SANITIZE_STRING));
+        $description = trim(filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING));
+        $image = trim(filter_input(INPUT_POST, 'imagePath', FILTER_SANITIZE_STRING));
+        $thumbnail = trim(filter_input(INPUT_POST, 'thumbnailPath', FILTER_SANITIZE_STRING));
+        $price = trim(filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_ALLOW_FRACTION));
+        $stock = trim(filter_input(INPUT_POST, 'stock', FILTER_SANITIZE_NUMBER_INT));
+        $color = trim(filter_input(INPUT_POST, 'color', FILTER_SANITIZE_STRING));
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+
+        if (
+            empty($classificationId) || empty($make) || empty($model)
+            || empty($description) || empty($image) || empty($thumbnail)
+            || empty($price) || empty($stock) || empty($color)
+        ) {
+            $_SESSION['message'] = '<p> Please complete all information for the item! Double check the classification of the item.</p>';
+            include '../view/vehicle-update.php';
+            exit;
+        }
+
+        $updateResult = updateVehicle($make, $model, $description, $image, $thumbnail, $price, $stock, $color, $classificationId, $invId);
+        if ($updateResult) {
+            $message = "<p class='notice'>Congratulations, the $invMake $invModel was successfully updated.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/vehicles/');
+            exit;
+        } else {
+            $_SESSION['message'] = "<p class='notice'>Error. the $invMake $invModel was not updated.</p>";
+            include '../view/vehicle-update.php';
+            exit;
+        }
+        break;
+    case 'del':
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_VALIDATE_INT);
+        $invInfo = getInvItemInfo($invId);
+        if (count($invInfo) < 1) {
+            $message = 'Sorry, no vehicle information could be found.';
+        }
+        include '../view/vehicle-delete.php';
+        exit;
+        break;
+    case 'deleteVehicle':
+        $invMake = filter_input(INPUT_POST, 'make', FILTER_SANITIZE_STRING);
+        $invModel = filter_input(INPUT_POST, 'model', FILTER_SANITIZE_STRING);
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+
+        $deleteResult = deleteVehicle($invId);
+        if ($deleteResult) {
+            $message = "<p class='notice'>Congratulations the, $invMake $invModel was	successfully deleted.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/vehicles/');
+            exit;
+        } else {
+            $message = "<p class='notice'>Error: $invMake $invModel was not
+deleted.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/vehicles/');
+            exit;
+        }
         break;
     default:
         $classificationList = buildClassificationList($classifications);
