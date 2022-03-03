@@ -8,9 +8,9 @@ if ($_SESSION['clientData']['clientLevel'] < 2) {
     $classificationList = '<select name="class">';
     $classificationList .= "<option value='choose Classification'>Choose Classification</option>";
     foreach ($classifications as $classification) {
-        $classificationList .= "<option value='$classification[classificationName]'";
-        if(isset($carclass)){
-            if($classification['classificationName'] === $carclass){
+        $classificationList .= "<option value='$classification[classificationId]'";
+        if(isset($classificationId)){
+            if($classification['classificationId'] == $classificationId){
                 $classificationList .= "selected";
             }
         }

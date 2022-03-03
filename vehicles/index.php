@@ -50,7 +50,7 @@ switch ($action) {
         }
         break;
     case 'addVehicletoInv':
-        $carclass = trim(filter_input(INPUT_POST, "class", FILTER_SANITIZE_STRING));
+        $classificationId = trim(filter_input(INPUT_POST, "class", FILTER_SANITIZE_STRING));
         $make = trim(filter_input(INPUT_POST, 'make', FILTER_SANITIZE_STRING));
         $model = trim(filter_input(INPUT_POST,'model', FILTER_SANITIZE_STRING));
         $description = trim(filter_input(INPUT_POST,'description', FILTER_SANITIZE_STRING));
@@ -61,14 +61,14 @@ switch ($action) {
         $color = trim(filter_input(INPUT_POST,'color', FILTER_SANITIZE_STRING));
 
         // Check for missing data
-        if (empty($carclass) || empty($make) || empty($model) || empty($description) || empty($image) || empty($thumbnail) || empty($price) || empty($stock) || empty($color)) {
+        if (empty($classificationId) || empty($make) || empty($model) || empty($description) || empty($image) || empty($thumbnail) || empty($price) || empty($stock) || empty($color)) {
             $_SESSION['message'] = '<p class="serverMessage">Please fill out all feilds for a vehicle to be added.</p>';
             include '../view/add-vehicle.php';
             exit;
         }
 
         // Send the data to the model
-        $regOutcome = addVehicleInv($carclass,$make, $model, $description, $image, $thumbnail, $price, $stock, $color);
+        $regOutcome = addVehicleInv($classificationId,$make, $model, $description, $image, $thumbnail, $price, $stock, $color);
 
         // Check and report the result
         if ($regOutcome === 1) {
@@ -88,6 +88,18 @@ switch ($action) {
     case 'addVehicle':
         include "../view/add-vehicle.php";
         break;
+    case 'getInventoryItems':
+        // Get the classificationId 
+        $classificationId = filter_input(INPUT_GET, 'classificationId', FILTER_SANITIZE_NUMBER_INT);
+        // Fetch the vehicles by classificationId from the DB 
+        $inventoryArray = getInventoryByClassification($classificationId);
+        // Convert the array to a JSON object and send it back 
+        echo json_encode($inventoryArray);
+        // echo json_encode("hello");
+        break;
     default:
+        $classificationList = buildClassificationList($classifications);
         include '../view/vehicle-man.php';
+        break;
+        exit;
 }
