@@ -27,11 +27,11 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] == TRUE) {
         <p>Update Account</p>
          <form action="/phpmotors/accounts/" method="post">
                 <label for="firstname">First Name</label><br>
-                <input type="text" name="clientFirstname" id="firstname" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";}  ?> required><br>
+                <input type="text" name="clientFirstname" id="firstname" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";}elseif(isset($clientInfo['clientFirstname'])){echo "value=$clientInfo[clientFirstname]";}  ?> required><br>
                 <label for="lastname">Last Name</label><br>
-                <input type="text" name="clientLastname" id="lastname" <?php if(isset($clientLastname)){echo "value='$clientLastname'";}  ?> required><br>
+                <input type="text" name="clientLastname" id="lastname" <?php if(isset($clientLastname)){echo "value='$clientLastname'";}elseif(isset($clientInfo['clientLastname'])){echo "value=$clientInfo[clientLastname]";}  ?> required><br>
                 <label for="email">Email</label><br>
-                <input type="email" name="clientEmail" id="email" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required><br>
+                <input type="email" name="clientEmail" id="email" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}elseif(isset($clientInfo['clientEmail'])){echo "value=$clientInfo[clientEmail]";}  ?> required><br>
                 <input class="submit" type="submit" name="submit" value="Update Info" id="regbtn">
                 <input type="hidden" name="action" value="updateClient">
                 <input type="hidden" name="invId" value="<?php if(isset($clientInfo['clientId'])){ echo $clientInfo['clientId'];} elseif(isset($clientId)){ echo $clientId; } ?>">

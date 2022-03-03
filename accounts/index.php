@@ -121,15 +121,10 @@ switch ($action){
         header('Location: /phpmotors/');
         exit;
     case "up":
-        if (isset($_SESSION['clientData'])){
-            echo $_SESSION['clientData']['clientId'];
-        }else{
-            echo "no";
-        }
-        $clientId = filter_input(INPUT_GET, 'clientId', FILTER_VALIDATE_INT);
-        echo $clientId;
+        $clientId = $_SESSION['clientData']['clientId'];
+        $clientInfo = getClientInfo($clientId);
+        array_pop($clientInfo);
         // $clientInfo = getClientInfo($clientId);
-
 
         include "../view/client-update.php";
         break;
