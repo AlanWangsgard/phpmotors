@@ -57,7 +57,7 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] == TRUE) {
             <p>*Note Your original password will be changed.</p>
             <label for="password">Password</label><br>
             <input type="password" name="clientPassword" id="password" required pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"><br>
-            <input class="submit" type="submit" name="submit" value="Update Password" id="regbtn">
+            <input class="submit" type="submit" name="submit" value="Update Password">
             <input type="hidden" name="action" value="updatePassword">
             <input type="hidden" name="clientId" value="<?php if (isset($clientInfo['clientId'])) {
                                                             echo $clientInfo['clientId'];
