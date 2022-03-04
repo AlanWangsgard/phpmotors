@@ -124,10 +124,89 @@ switch ($action){
         $clientId = $_SESSION['clientData']['clientId'];
         $clientInfo = getClientInfo($clientId);
         array_pop($clientInfo);
+
+        $_SESSION['clientInfo'] = $clientInfo;
         // $clientInfo = getClientInfo($clientId);
 
         include "../view/client-update.php";
         break;
     case "updateClient":
+        $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname' , FILTER_SANITIZE_STRING));
+        $clientLastname = trim(filter_input(INPUT_POST,'clientLastname' , FILTER_SANITIZE_STRING));
+        $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail' , FILTER_SANITIZE_STRING));
+        $clientId = trim(filter_input(INPUT_POST, 'clientId' , FILTER_SANITIZE_NUMBER_INT));;
+
+        if ($clientEmail != $_SESSION['clientData']['clientEmail']) {
+            $clientEmail = checkEmail($clientEmail);
+            $existingEmail = checkExistingEmail($clientEmail);
+        }
+
+        // Check for existing email address in the table
+        if ($existingEmail) {
+            $_SESSION['message'] = '<p class="notice">That email address already exists.</p>';
+            include '../view/client-update.php';
+            exit;
+        }
+
+        if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail || empty($clientId))){
+            $_SESSION['message'] = '<p> Please complete all information for the item!.</p>';
+            include '../view/client-update.php';
+            exit;
+        }
+
+        $updateClientres = updateClient($clientFirstname, $clientLastname, $clientEmail, $clientId);
+        if ($updateClientres){
+            $message = "<p class='notice'>Congratulations, $clientFirstname, your profile was successfully updated.</p>";
+            $_SESSION['message'] = $message;
+
+            $clientData = getClient($clientEmail);
+            
+            
+            // A valid user exists, log them in
+            $_SESSION['loggedin'] = TRUE;
+            // Remove the password from the array
+            // the array_pop function removes the last
+            // element from an array
+            array_pop($clientData);
+            // Store the array into the session
+            if (isset($_SESSION['clientData'])){
+                unset($_SESSION['clientData']);
+            }
+            $_SESSION['clientData'] = $clientData;
+
+            header('location: /phpmotors/accounts/index.php?action=admin');
+
+            exit;
+        } else {
+            $_SESSION['message'] = "<p class='notice'>Error. Profile not updated.</p>";
+            include '../view/client-update.php';
+            exit;
+        }
+        break;
+    case "updatePassword":
+        $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
+        $clientId = trim(filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT));;
+
+        $checkPassword = checkPassword($clientPassword);
+
+        if (empty($clientId) || empty($checkPassword)) {
+            $_SESSION['message'] = '<p>Please provide information for all empty form fields.</p>';
+            include '../view/client-update.php';
+            exit;
+        }
+
+        $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+
+        $updateResult = updateClientPassowrd($clientId, $hashedPassword);
+        if ($updateResult) {
+            $message = "<p class='notice'>Congratulations, $clientFirstname, your profile was successfully updated.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/accounts/index.php?action=admin');
+        } else {
+            $_SESSION['message'] = "<p class='notice'>Error. Profile not updated.</p>";
+            include '../view/client-update.php';
+            exit;
+        }
+
         break;
 }

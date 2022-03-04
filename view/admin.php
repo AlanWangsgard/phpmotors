@@ -27,6 +27,11 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] == TRUE) {
             echo $_SESSION['clientData']['clientFirstname'] . " " . $_SESSION['clientData']['clientLastname'];
             ?></h1>
         <p>You are logged in</p>
+        <?php
+        if (isset($_SESSION['message'])) {
+            echo $_SESSION['message'];
+        }
+        ?>
         <ul>
             <li>First Name: <?php echo $_SESSION['clientData']['clientFirstname'] ?></li>
             <li>Last Name: <?php echo $_SESSION['clientData']['clientLastname'] ?></li>
@@ -35,10 +40,10 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] == TRUE) {
         <h2>Account Managment</h2>
         <p>Use This link to update account information</p>
         <a href="/phpmotors/accounts/index.php?action=up">Update Account Information</a>
-        <?php 
-            if($_SESSION['clientData']['clientLevel'] > 1){
-                echo "<h2>Inventory Management</h2><p>Use this link to manage inventory</p><a href='/phpmotors/vehicles/'>Vehicle Management</a>";
-            }
+        <?php
+        if ($_SESSION['clientData']['clientLevel'] > 1) {
+            echo "<h2>Inventory Management</h2><p>Use this link to manage inventory</p><a href='/phpmotors/vehicles/'>Vehicle Management</a>";
+        }
         ?>
     </main>
     <footer>
