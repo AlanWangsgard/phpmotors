@@ -28,7 +28,7 @@
                     <li>Fuzzy dice!</li>
                 </ul>
                 <img class="own" src="images/site/own_today.png" alt="Own Today.png">
-                <img class="delorean_img" src="images/delorean.jpg" alt="Delorean.jpg">
+                <img class="delorean_img" src="images/vehicles/delorean.jpg" alt="Delorean.jpg">
             </div>
         </div>
         <div class="content">

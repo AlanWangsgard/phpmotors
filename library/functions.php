@@ -16,7 +16,7 @@ function createNav($classifications)
     $navList = '<ul>';
     $navList .= "<li><a href='http://localhost/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></li>";
     foreach ($classifications as $classification) {
-        $navList .= "<li><a href='/phpmotors/index.php?action=" . urlencode($classification['classificationName']) . "' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
+        $navList .= "<li><a href='/phpmotors/vehicles/?action=classification&classificationName=" . urlencode($classification['classificationName']) . "' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
     }
     $navList .= '</ul>';
 
@@ -33,4 +33,35 @@ function buildClassificationList($classifications)
     }
     $classificationList .= '</select>';
     return $classificationList;
+}
+
+function buildVehiclesDisplay($vehicles)
+{
+    $dv = '<ul id="inv-display">';
+    foreach ($vehicles as $vehicle) {
+        $dv .= '<a href="/phpmotors/vehicles/index.php?action=displayVehicle&invId=' . urldecode($vehicle["invId"]).'"' . '><li>';
+        $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+        $dv .= '<hr>';
+        $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
+        $dv .= "<span>$vehicle[invPrice]</span>";
+        $dv .= '</li></a>';
+    }
+    $dv .= '</ul>';
+    return $dv;
+}
+
+function buildVehicleInfo($vehicle){
+    $info = '<div id="vInfo" >';
+    $info .= '<p class="mnm">' . $vehicle["invMake"] . ' ';
+    $info .= $vehicle["invModel"] . '</p>';
+    $info .= '<img src=' . $vehicle["invImage"] . ' alt="Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com">';
+    $info .= '<p class="vDesc" >Description: ' . $vehicle["invDescription"] . '</p>';
+    $info .= '<p class="vPrice" >Price: $' . $vehicle["invPrice"] . '</p>';
+    $info .= '<p class="vColor" >Color: ' . $vehicle["invColor"] . '</p>';
+    $info .= '<p class="vStock" > Stock: ' . $vehicle["invStock"] . '</p>';
+    $info .= '</div>';
+
+    return $info;
+
+
 }

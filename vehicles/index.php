@@ -162,12 +162,39 @@ switch ($action) {
             header('location: /phpmotors/vehicles/');
             exit;
         } else {
-            $message = "<p class='notice'>Error: $invMake $invModel was not
-deleted.</p>";
+            $message = "<p class='notice'>Error: $invMake $invModel was not deleted.</p>";
             $_SESSION['message'] = $message;
             header('location: /phpmotors/vehicles/');
             exit;
         }
+        break;
+    case 'classification':
+        $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING);
+        $vehicles = getVehiclesByClassification($classificationName);
+        if (!count($vehicles)) {
+            $message = "<p class='notice'>Sorry, no $classificationName could be found.</p>";
+        } else {
+            $vehicleDisplay = buildVehiclesDisplay($vehicles);
+        }
+        include '../view/classification.php';
+        break;
+    case 'displayVehicle':
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_STRING);
+        if (empty($invId)){
+            $_SESSION['message'] = "Server could not get Vehicle Id";
+            include '../view/vehicle-detail.php';
+             break;
+        }else{
+            unset($_SESSION['message']);
+            $vehicle = getInvItemInfo($invId);
+            if (empty($vehicle)) {
+                $_SESSION['message'] = "No vehicle was found";
+                include '../view/vehicle-detail.php';
+                break;
+            }
+        }
+        $vehicleInfo = buildVehicleInfo($vehicle);
+        include '../view/vehicle-detail.php';
         break;
     default:
         $classificationList = buildClassificationList($classifications);
