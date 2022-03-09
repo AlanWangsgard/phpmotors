@@ -55,13 +55,21 @@ function buildVehicleInfo($vehicle){
     $info .= '<p class="mnm">' . $vehicle["invMake"] . ' ';
     $info .= $vehicle["invModel"] . '</p>';
     $info .= '<img src=' . $vehicle["invImage"] . ' alt="Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com">';
-    $info .= '<p class="vDesc" >Description: ' . $vehicle["invDescription"] . '</p>';
-    $info .= '<p class="vPrice" >Price: $' . $vehicle["invPrice"] . '</p>';
-    $info .= '<p class="vColor" >Color: ' . $vehicle["invColor"] . '</p>';
-    $info .= '<p class="vStock" > Stock: ' . $vehicle["invStock"] . '</p>';
+    $info .= '<p class="vDesc" ><span class="vTitle">' .$vehicle["invMake"] . ' ' . $vehicle["invModel"] . ' description:</span><br>' . $vehicle["invDescription"] . '</p>';
+    $priceArray = str_split(strrev($vehicle["invPrice"]));
+    $properPrice = "";
+    for ($i = 0; $i < strlen($vehicle["invPrice"]); $i++){
+        if ($i%3 == 0 && $i != 0){
+            $properPrice .= ",";
+            $properPrice .= $priceArray[$i];
+        }else{
+            $properPrice .= $priceArray[$i];
+        }
+    }
+    $info .= '<p class="vAttr" >Price: $' . strrev($properPrice);
+    $info .= '<br>Color: ' . $vehicle["invColor"];
+    $info .= '<br>Stock:'.$vehicle["invStock"] . '</p>';
     $info .= '</div>';
 
     return $info;
-
-
-}
+ }
