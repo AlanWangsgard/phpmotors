@@ -22,7 +22,7 @@ if (isset($_SESSION['message'])) {
         echo $navList;
         ?>
     </nav>
-    <main>
+    <main class="imgMan">
         <h1>Image Management</h1>
         <p>Welcome to the image management page! Choose an option below:</p>
         <h2>Add New Vehicle Image</h2>

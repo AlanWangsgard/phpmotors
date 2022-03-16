@@ -235,3 +235,12 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height)
     // Free any memory associated with the old image
     imagedestroy($old_image);
 } // ends resizeImage function
+
+function wrapThumbnails($tns){
+    $thumbnails = "<div class='vehicleTns'>";
+    foreach ($tns as $tn){
+        $thumbnails .= '<img src="' . $tn['imgPath'] . '" alt="'. $tn['imgName'] .'"> ';
+    }
+    $thumbnails .= "</div>";
+    return $thumbnails;
+}

@@ -13,6 +13,8 @@ require_once '../model/vehicle-model.php';
 
 require_once '../library/functions.php';
 
+require_once '../model/uploads-model.php';
+
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -193,6 +195,8 @@ switch ($action) {
                 break;
             }
         }
+        $tnImg = getThumbnail($invId);
+        $vehicleImgs =  wrapThumbnails($tnImg);
         $vehicleInfo = buildVehicleInfo($vehicle);
         include '../view/vehicle-detail.php';
         break;

@@ -338,6 +338,41 @@ footer p {
     font-weight: bold;
 }
 
+.vehicleTns {
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.vehicleTns img {
+    width: 80%;
+}
+
+.imgMan select,
+.imgMan label,
+.imgMan input {
+    margin: 10px;
+}
+
+.imgMan li {
+    list-style-type: none;
+}
+
+.imgMan fieldset {
+    margin: 10px;
+}
+
+.imgMan h2,
+.imgMan p,
+.imgMan h1 {
+    margin-left: 10px;
+}
+
+.imgMan img {
+    max-width: 90%;
+}
+
 @media (min-width: 800px) {
     /* Body Styles */
     body {
@@ -469,7 +504,10 @@ footer p {
         grid-template-columns: 47% 47%;
         grid-column-gap: 3%;
         margin-left: 3%;
+        margin-right: 3%;
         margin-bottom: 10px;
+        margin-top: 10px;
+        border: 1px solid black;
     }
     .mnm {
         font-weight: bold;
@@ -484,5 +522,31 @@ footer p {
     }
     .vTitle {
         font-weight: bold;
+    }
+    .vehicleTns {
+        margin-left: 3%;
+        margin-right: 3%;
+        margin-bottom: 10px;
+        border: 1px solid black;
+    }
+    .vehicleTns img {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .imgMan select,
+    .imgMan label,
+    .imgMan input {
+        margin: 10px;
+    }
+    .imgMan li {
+        list-style-type: none;
+    }
+    .imgMan fieldset {
+        margin: 10px;
+    }
+    .imgMan h2,
+    .imgMan p,
+    .imgMan h1 {
+        margin-left: 10px;
     }
 }

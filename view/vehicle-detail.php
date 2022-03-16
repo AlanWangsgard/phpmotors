@@ -23,6 +23,8 @@
             echo $_SESSION['message'];
         }
         echo $vehicleInfo;
+        echo $vehicleImgs;
+
         ?>
     </main>
     <footer>
