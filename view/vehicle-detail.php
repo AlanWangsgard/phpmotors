@@ -18,6 +18,7 @@
         ?>
     </nav>
     <main>
+        <div class="vehiDisplay">
         <?php
         if (isset($_SESSION['message'])){
             echo $_SESSION['message'];
@@ -26,6 +27,7 @@
         echo $vehicleImgs;
 
         ?>
+        </div>
     </main>
     <footer>
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/commonContent/footer.php'; ?>
