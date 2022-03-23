@@ -15,6 +15,8 @@ require_once '../library/functions.php';
 
 require_once '../model/uploads-model.php';
 
+require_once '../model/reviws-model.php';
+
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -182,6 +184,7 @@ switch ($action) {
         break;
     case 'displayVehicle':
         $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_STRING);
+
         if (empty($invId)){
             $_SESSION['message'] = "Server could not get Vehicle Id";
             include '../view/vehicle-detail.php';
@@ -198,6 +201,8 @@ switch ($action) {
         $tnImg = getThumbnail($invId);
         $vehicleImgs =  wrapThumbnails($tnImg);
         $vehicleInfo = buildVehicleInfo($vehicle);
+        $reviewlist = getReviewsByInvId($invId);
+        $reviews = buildReviewView($reviewlist);
         include '../view/vehicle-detail.php';
         break;
     default:

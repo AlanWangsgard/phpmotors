@@ -45,6 +45,16 @@ if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] == TRUE) {
             echo "<h2>Inventory Management</h2><p>Use this link to manage inventory</p><a href='/phpmotors/vehicles/'>Vehicle Management</a>";
         }
         ?>
+        <h2>Your Reviews</h2>
+        <?php
+        //show reviews if they are there ordered by date
+        echo "reviews";
+        if (isset($reviews)){
+            echo $reviews;
+        }else{
+            echo "no";
+        }
+        ?>
     </main>
     <footer>
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/commonContent/footer.php'; ?>

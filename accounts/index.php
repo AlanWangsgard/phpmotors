@@ -13,6 +13,8 @@ require_once '../model/accounts-model.php';
 
 require_once '../library/functions.php';
 
+require_once '../model/reviws-model.php';
+
 // Get the array of classifications
 $classifications = getClassifications();
 
@@ -108,10 +110,17 @@ switch ($action){
         // Store the array into the session
         $_SESSION['clientData'] = $clientData;
         // Send them to the admin view
+
+        $reviewlist = getReviewsByClientId($_SESSION['clientData']['clientId']);
+        $reviews = buildReviewView($reviewlist);
+
         include '../view/admin.php';
         exit;
         break;
     case 'admin':
+        $reviewlist = getReviewsByClientId($_SESSION['clientData']['clientId']);
+        $reviews = buildReviewAdmin($reviewlist);
+
         include '../view/admin.php';
         break;
     case "LogOut":
