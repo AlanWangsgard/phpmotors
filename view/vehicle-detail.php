@@ -33,7 +33,9 @@
         <?php
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
             echo '<h2>Customer Reviews</h2>
+            <h3>Review the Vehicle<h3>
         <form action="/phpmotors/reviews/index.php?action=add" method="POST">
+            <input type="text" name="screenName" readonly value="'. substr($_SESSION['clientData']['clientFirstname'], 0, 1). $_SESSION['clientData']['clientLastname'] .'">
             <textarea name="reviewText"></textarea>
             <input type="hidden" name="invId" value="<?php echo' . $invId . ' ?>">
             <input type="hidden" name="clientId" value="<?php echo' . $_SESSION['clientData']['clientId'] . '?>">

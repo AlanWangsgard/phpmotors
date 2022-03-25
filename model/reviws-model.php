@@ -124,9 +124,8 @@ function buildReviewView($reviewList){
     $reviews = "<div>";
     foreach ($reviewList as $review) {
         $reviews .= "<div class='review'>";
-        $reviews .= "<h3>" . $review['clientFirstname'][0] . $review['clientLastname'] . "</h3>";
+        $reviews .= "<h3>" . $review['clientFirstname'][0] . $review['clientLastname'] . " ". date("d M Y",strtotime($review['reviewDate'])). "</h3>";
         $reviews .= "<p>" . $review['reviewText'] . "</p>";
-        $reviews .= $review['reviewDate'];
         $reviews .= "</div>";
     }
     $reviews .= "</div>";
@@ -138,9 +137,8 @@ function buildReviewAdmin($reviewList)
     $reviews = "<div>";
     foreach ($reviewList as $review) {
         $reviews .= "<div class='review'>";
-        $reviews .= "<h3>" . $review['clientFirstname'][0] . $review['clientLastname'] . "</h3>";
+        $reviews .= "<h3>" . $review['clientFirstname'][0] . $review['clientLastname'] . " " . date("d M Y", strtotime($review['reviewDate'])) . "</h3>";
         $reviews .= "<p>" . $review['reviewText'] . "</p>";
-        $reviews .= $review['reviewDate'] . "<br>";
         $reviews .= "<a href='/phpmotors/reviews/index.php?action=edit&reviewId=" . $review['reviewId'] . "'>Edit</a> <a href='/phpmotors/reviews/index.php?action=confirm-delete&reviewId=". $review['reviewId']."'>Delete</a>";
         $reviews .= "</div>";
     }

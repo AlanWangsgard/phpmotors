@@ -37,6 +37,7 @@ switch ($action) {
         }
 
         if ($result){
+            $_SESSION['message'] = "Thank you for adding a review!";
             header("Location: /phpmotors/vehicles/index.php?action=displayVehicle&invId=" . $invId);
             break;
         }
@@ -63,6 +64,7 @@ switch ($action) {
             include "../view/edit-review.php";
             break;
         }
+        $_SESSION['message'] = "Review updated succesfully";
         header("Location: /phpmotors/accounts/index.php?action=admin");
         break;
     case "confirm-delete":
@@ -86,6 +88,7 @@ switch ($action) {
             include "../view/delete-review.php";
             break;
         }
+        $_SESSION['message'] = "Review Deleted succesfully";
         header("Location: /phpmotors/accounts/index.php?action=admin");
         break;
     default:
