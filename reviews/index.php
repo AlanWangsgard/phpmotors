@@ -27,14 +27,12 @@ switch ($action) {
         $clientId = $_SESSION['clientData']['clientId'];
 
         if (empty($invId) || empty($reviewText) || empty($clientId)){
-            $_SESSION['message'] = "error";
-            echo $invId, $clientId, $reviewText;
-
-            //header ("Location: /phpmotors/vehicles/index.php?action=displayVehicle&invId=". $invId);
+            $_SESSION["message"] = "<p>error, please fill out the form completely.</p>";
+            header ("Location: /phpmotors/vehicles/index.php?action=displayVehicle&invId=". $invId);
             break;
         }
         else{
-            echo $invId, $clientId, $reviewText;
+            unset($_SESSION["message"]);
             $result = addReview($invId, $clientId, $reviewText);
         }
 
@@ -45,14 +43,50 @@ switch ($action) {
 
         break;
     case "edit":
+        $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+
+        $review = getReview($reviewId);
         include "../view/edit-review.php";
         break;
     case "update":
+        $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+        $reviewText = filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING);
+
+        if (empty($reviewId)) {
+            $_SESSION['message'] = "could not get Id";
+            include "../view/edit-review.php";
+            break;
+        }
+        $updated = updateReview($reviewId, $reviewText);
+        if (empty($updated)) {
+            $_SESSION['message'] = "could not get delete review";
+            include "../view/edit-review.php";
+            break;
+        }
+        header("Location: /phpmotors/accounts/index.php?action=admin");
         break;
     case "confirm-delete":
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+
+        $review = getReview($reviewId);
         include "../view/delete-review.php";
         break;
     case "delete":
+        $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+
+        if (empty($reviewId)){
+            $_SESSION['message'] = "could not get Id";
+            include "../view/delete-review.php";
+            break;
+        }
+        $deleted = deleteReview($reviewId);
+        if (empty($deleted)) {
+            $_SESSION['message'] = "could not get delete review";
+            include "../view/delete-review.php";
+            break;
+        }
+        header("Location: /phpmotors/accounts/index.php?action=admin");
         break;
     default:
         if ($_SESSION['loggedin'] == TRUE){

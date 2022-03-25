@@ -112,7 +112,7 @@ switch ($action){
         // Send them to the admin view
 
         $reviewlist = getReviewsByClientId($_SESSION['clientData']['clientId']);
-        $reviews = buildReviewView($reviewlist);
+        $reviews = buildReviewAdmin($reviewlist);
 
         include '../view/admin.php';
         exit;

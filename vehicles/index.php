@@ -190,7 +190,6 @@ switch ($action) {
             include '../view/vehicle-detail.php';
              break;
         }else{
-            unset($_SESSION['message']);
             $vehicle = getInvItemInfo($invId);
             if (empty($vehicle)) {
                 $_SESSION['message'] = "No vehicle was found";
