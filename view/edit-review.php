@@ -29,11 +29,16 @@
                 echo "<p>Reviewed on " . date("d M Y", strtotime($review['reviewDate'])) . "</p>";
             }
             ?>
+            <?php
+            if (isset($_SESSION['message'])) {
+                echo $_SESSION['message'];
+            }
+            ?>
             <form action="/phpmotors/reviews/index.php?action=update" method="POST">
                 <label for="editreviewText">Review Text</label>
-                <textarea id="editreviewText" rows="6" name="reviewText"><?php if (isset($review['reviewText'])) {
-                                                            echo $review['reviewText'];
-                                                        }; ?></textarea><br>
+                <textarea required id="editreviewText" rows="6" name="reviewText"><?php if (isset($review['reviewText'])) {
+                                                                                echo $review['reviewText'];
+                                                                            }; ?></textarea><br>
                 <input type="hidden" name="reviewId" value="<?php if (isset($reviewId)) {
                                                                 echo $reviewId;
                                                             }   ?>">

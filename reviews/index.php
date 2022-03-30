@@ -62,13 +62,20 @@ switch ($action) {
 
         if (empty($reviewId)) {
             $_SESSION['message'] = "could not get Id";
-            include "../view/edit-review.php";
+            header("Location: /phpmotors/reviews/index.php?action=edit&reviewId=$reviewId");
+            break;
+        }
+
+        if (empty($reviewText)) {
+            $_SESSION['message'] = "Please include review text";
+            header("Location: /phpmotors/reviews/index.php?action=edit&reviewId=$reviewId");
+            // include "../view/edit-review.php";
             break;
         }
         $updated = updateReview($reviewId, $reviewText);
         if (empty($updated)) {
-            $_SESSION['message'] = "could not get delete review";
-            include "../view/edit-review.php";
+            $_SESSION['message'] = "could not update review";
+            header("Location: /phpmotors/reviews/index.php?action=edit&reviewId=$reviewId");
             break;
         }
         $_SESSION['message'] = "Review updated succesfully";

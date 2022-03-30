@@ -42,9 +42,9 @@
             <div class="reviewForm">
         <form action="/phpmotors/reviews/index.php?action=add" method="POST">
             <label for="screenName">Screen Name</label><br>
-            <input class="uinput" id="screenName" type="text" name="screenName" readonly value="' . substr($_SESSION['clientData']['clientFirstname'], 0, 1) . $_SESSION['clientData']['clientLastname'] . '"><br>
+            <input required class="uinput" id="screenName" type="text" name="screenName" readonly value="' . substr($_SESSION['clientData']['clientFirstname'], 0, 1) . $_SESSION['clientData']['clientLastname'] . '"><br>
             <label for="reviewText">Review</label><br>
-            <textarea class="uinput" id="reviewText" name="reviewText" rows="6"></textarea><br>
+            <textarea required class="uinput" id="reviewText" name="reviewText" rows="6"></textarea><br>
             <input type="hidden" name="invId" value="<?php echo' . $invId . ' ?>">
             <input type="hidden" name="clientId" value="<?php echo' . $_SESSION['clientData']['clientId'] . '?>">
             <input class="btn" type="submit" value="Submit Review">
