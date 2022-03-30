@@ -18,15 +18,30 @@
         ?>
     </nav>
     <main>
-        <h1>Content Title Here</h1>
-        
-            <h2>Delete Reviews</h2>
-        <form action="/phpmotors/reviews/index.php?action=delete" method="POST">
-            <textarea name="reviewText" readonly><?php if (isset($review['reviewText'])){echo $review['reviewText'];};?></textarea>
-            <input type="hidden" name="reviewId" value="<?php if (isset($reviewId)){echo $reviewId;}   ?>">
-            <input type="hidden" name="clientId" value="<?php echo $_SESSION["clientData"]["clientId"] ?>">
-            <input type="submit">
-        </form>
+        <div class="delRev">
+            <?php
+            if (isset($item)) {
+                echo "<h1>" . $item['invMake'] . " " . $item['invModel'] . " Review</h1>";
+            }
+            ?>
+            <?php
+            if (isset($review)) {
+                echo "<p>Reviewed on " . date("d M Y", strtotime($review['reviewDate'])) . "</p>";
+            }
+            ?>
+            <p>Deletes cannot be undone, Are you sure you want to delete the review?</p>
+            <form action="/phpmotors/reviews/index.php?action=delete" method="POST">
+                <label for="delreviewText">Review Text</label>
+                <textarea id="delreviewText" rows="6" name="reviewText" readonly><?php if (isset($review['reviewText'])) {
+                                                                    echo $review['reviewText'];
+                                                                }; ?></textarea><br>
+                <input type="hidden" name="reviewId" value="<?php if (isset($reviewId)) {
+                                                                echo $reviewId;
+                                                            }   ?>">
+                <input type="hidden" name="clientId" value="<?php echo $_SESSION["clientData"]["clientId"] ?>">
+                <input type="submit" value="Delete Review">
+            </form>
+        </div>
     </main>
     <footer>
         <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/commonContent/footer.php'; ?>

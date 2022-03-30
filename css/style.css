@@ -373,6 +373,76 @@ footer p {
     max-width: 90%;
 }
 
+.review {
+    margin: auto;
+    max-width: 95%;
+    background-color: #4c96d7;
+    padding: 3px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.review p {
+    background-color: white;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.review h3 {
+    margin: 0;
+    font-weight: 500;
+}
+
+.reviewForm {
+    max-width: 95%;
+    margin: auto;
+    border: 3px solid black;
+}
+
+.reviewForm label,
+#screenName,
+.btn {
+    margin-left: 25px;
+}
+
+#reviewText {
+    margin-left: 25px;
+    width: 70%;
+}
+
+.btn {
+    background-color: #4c96d7;
+    margin-bottom: 10px;
+}
+
+.reviewHead {
+    margin-left: 20px;
+}
+
+.adminView {
+    margin-left: 15px;
+}
+
+#inv-display a {
+    text-decoration: none;
+    color: black;
+}
+
+#inv-display a li:hover {
+    border: 1px solid black;
+}
+
+.editRev,
+.delRev {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.editRev textarea,
+.delRev textarea {
+    width: 95%;
+}
+
 @media (min-width: 800px) {
     /* Body Styles */
     body {
@@ -565,5 +635,8 @@ footer p {
     }
     .image-display li {
         display: inline;
+    }
+    #reviewText {
+        width: 95%;
     }
 }

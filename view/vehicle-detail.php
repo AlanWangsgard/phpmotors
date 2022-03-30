@@ -19,10 +19,6 @@
     </nav>
     <main>
         <p>Vehicle Reviews are at the bottom of the page.</p>
-        <?php
-        if (isset($_SESSION['message'])) {
-            echo $_SESSION['message'];
-        } ?>
         <div class="vehiDisplay">
             <?php
             echo $vehicleInfo;
@@ -30,17 +26,29 @@
 
             ?>
         </div>
+        <div class="reviewHead">
+        <h2>Customer Reviews</h2>
+        <?php
+        echo "<h3>Review the " . $vehicle['invMake'] ." ". $vehicle["invModel"] . "</h3>";
+        ?>
+        <?php
+        if (isset($_SESSION['message'])) {
+            echo $_SESSION['message'];
+        } ?>
+        </div>
         <?php
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-            echo '<h2>Customer Reviews</h2>
-            <h3>Review the Vehicle<h3>
+            echo '
+            <div class="reviewForm">
         <form action="/phpmotors/reviews/index.php?action=add" method="POST">
-            <input type="text" name="screenName" readonly value="'. substr($_SESSION['clientData']['clientFirstname'], 0, 1). $_SESSION['clientData']['clientLastname'] .'">
-            <textarea name="reviewText"></textarea>
+            <label for="screenName">Screen Name</label><br>
+            <input class="uinput" id="screenName" type="text" name="screenName" readonly value="' . substr($_SESSION['clientData']['clientFirstname'], 0, 1) . $_SESSION['clientData']['clientLastname'] . '"><br>
+            <label for="reviewText">Review</label><br>
+            <textarea class="uinput" id="reviewText" name="reviewText" rows="6"></textarea><br>
             <input type="hidden" name="invId" value="<?php echo' . $invId . ' ?>">
             <input type="hidden" name="clientId" value="<?php echo' . $_SESSION['clientData']['clientId'] . '?>">
-            <input type="submit">
-        </form>';
+            <input class="btn" type="submit" value="Submit Review">
+        </form></div>';
         } else {
             echo "<p>You may add a review if you log in</p><a href='/phpmotors/accounts/index.php?action=login'>Log In</a>";
         }

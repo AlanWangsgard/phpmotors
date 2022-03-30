@@ -180,28 +180,36 @@ switch ($action) {
         } else {
             $vehicleDisplay = buildVehiclesDisplay($vehicles);
         }
+        unset($_SESSION['message']);
         include '../view/classification.php';
         break;
     case 'displayVehicle':
         $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_STRING);
 
         if (empty($invId)){
-            $_SESSION['message'] = "Server could not get Vehicle Id";
+            $_SESSION['Vmessage'] = "Server could not get Vehicle Id";
             include '../view/vehicle-detail.php';
              break;
         }else{
             $vehicle = getInvItemInfo($invId);
             if (empty($vehicle)) {
-                $_SESSION['message'] = "No vehicle was found";
+                $_SESSION['Vmessage'] = "No vehicle was found";
                 include '../view/vehicle-detail.php';
                 break;
             }
+            
         }
         $tnImg = getThumbnail($invId);
         $vehicleImgs =  wrapThumbnails($tnImg);
         $vehicleInfo = buildVehicleInfo($vehicle);
+
         $reviewlist = getReviewsByInvId($invId);
+
+        if (empty($reviewlist)){
+            $reviews = "<p>Be the first to leave a review!</p>";
+        }else{
         $reviews = buildReviewView($reviewlist);
+        }
         include '../view/vehicle-detail.php';
         break;
     default:

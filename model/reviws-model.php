@@ -47,7 +47,7 @@ function getReviewsByClientId($clientId){
     // Create a connection object using the phpmotors connection function
     $db = phpmotorsConnect();
     // The SQL statement
-    $sql = 'SELECT * FROM reviews as r JOIN clients as c ON r.clientId = c.clientId WHERE r.clientId = :clientId ORDER BY reviewDate DESC';
+    $sql = 'SELECT * FROM reviews as r JOIN clients as c ON r.clientId = c.clientId JOIN inventory as i ON i.invId = r.invId WHERE r.clientId = :clientId ORDER BY reviewDate DESC';
 
     $stmt = $db->prepare($sql);
 
@@ -137,7 +137,7 @@ function buildReviewAdmin($reviewList)
     $reviews = "<div>";
     foreach ($reviewList as $review) {
         $reviews .= "<div class='review'>";
-        $reviews .= "<h3>" . $review['clientFirstname'][0] . $review['clientLastname'] . " " . date("d M Y", strtotime($review['reviewDate'])) . "</h3>";
+        $reviews .= "<h3>" . $review['invMake'] .' '. $review['invModel'] . " (Reviewed on " . date("d M Y", strtotime($review['reviewDate'])) . ")</h3>";
         $reviews .= "<p>" . $review['reviewText'] . "</p>";
         $reviews .= "<a href='/phpmotors/reviews/index.php?action=edit&reviewId=" . $review['reviewId'] . "'>Edit</a> <a href='/phpmotors/reviews/index.php?action=confirm-delete&reviewId=". $review['reviewId']."'>Delete</a>";
         $reviews .= "</div>";

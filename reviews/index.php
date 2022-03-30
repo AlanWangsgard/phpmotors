@@ -46,7 +46,14 @@ switch ($action) {
     case "edit":
         $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
 
+        if (empty($reviewId)){
+            $_SESSION['message'] = "Could not get review";
+            header("Location: /phpmotors/accounts/index.php?action=admin");
+            break;
+        }
+
         $review = getReview($reviewId);
+        $item = getInvItemInfo($review['invId']);
         include "../view/edit-review.php";
         break;
     case "update":
@@ -68,10 +75,16 @@ switch ($action) {
         header("Location: /phpmotors/accounts/index.php?action=admin");
         break;
     case "confirm-delete":
-        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
         $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
 
+        if (empty($reviewId)){
+            $_SESSION['message'] = "Could not delete";
+            include "../view/delete-review.php";
+            break;
+        }
+
         $review = getReview($reviewId);
+        $item = getInvItemInfo($review['invId']);
         include "../view/delete-review.php";
         break;
     case "delete":
