@@ -50,7 +50,7 @@
             <input class="btn" type="submit" value="Submit Review">
         </form></div>';
         } else {
-            echo "<p>You may add a review if you log in</p><a href='/phpmotors/accounts/index.php?action=login'>Log In</a>";
+            echo "<p>You may add a review if you <a href='/phpmotors/accounts/index.php?action=login'>Log In</a></p>";
         }
 
         if (isset($reviews)) {
